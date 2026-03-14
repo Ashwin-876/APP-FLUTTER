@@ -11,11 +11,12 @@ class UserPreferences {
 
   UserPreferences({
     this.familyName = '',
-    this.dietaryPreferences = const [],
-    this.allergens = const [],
+    List<String>? dietaryPreferences,
+    List<String>? allergens,
     this.notificationsEnabled = true,
     this.language = 'English (US)',
     this.measurementUnit = 'Metric (kg, grams)',
     this.themeMode = ThemeMode.system,
-  });
+  })  : dietaryPreferences = dietaryPreferences ?? [],
+        allergens = allergens ?? [];
 }

@@ -21,6 +21,19 @@ class _DietaryPreferencesScreenState extends State<DietaryPreferencesScreen> {
   };
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final saved = context.read<UserProvider>().preferences.dietaryPreferences;
+      setState(() {
+        for (final key in _preferences.keys) {
+          _preferences[key] = saved.contains(key);
+        }
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
