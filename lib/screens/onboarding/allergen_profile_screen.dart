@@ -23,6 +23,20 @@ class _AllergenProfileScreenState extends State<AllergenProfileScreen> {
   };
 
   @override
+  void initState() {
+    super.initState();
+    // Load saved allergen selections from provider after first frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final saved = context.read<UserProvider>().preferences.allergens;
+      setState(() {
+        for (final key in _allergens.keys) {
+          _allergens[key]!['checked'] = saved.contains(key);
+        }
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
